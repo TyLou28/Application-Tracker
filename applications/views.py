@@ -18,3 +18,19 @@ def create_applications(request):
         return Response(serialiser.data, status=status.HTTP_201_CREATED)
     return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PUT', 'DELETE'])
+def application_details(request, pk):
+    try:
+        application = Applications.objects.get(pk=pk)
+    except Applications.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'DELETE':
+        application.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'PUT':
+        serialiser = ApplicationsSerialiser(application, data=request.data)
+        if serialiser.is_valid():
+            serialiser.save()
+            return Response(serialiser.data, status=status.HTTP_201_CREATED)
+        return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
