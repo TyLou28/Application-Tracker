@@ -1,3 +1,6 @@
 at_env/
 .qodo
 db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
