@@ -2,8 +2,9 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import User
-from .serializers import userSerialiser, userRegistrationSerialiser
+from .serializers import userSerialiser, userRegistrationSerialiser, userLoginSerialiser
 from rest_framework_simplejwt.tokens import RefreshToken
 
 @api_view(['GET'])
@@ -22,6 +23,7 @@ def register(request):
 
 # Switched to APIView instead for better reuseability and scalability
 class userRegistrationAPIView(GenericAPIView):
+    permission_classes = (AllowAny,)
     serializer_class = userRegistrationSerialiser
 
     def post(self, request):
@@ -34,4 +36,31 @@ class userRegistrationAPIView(GenericAPIView):
                               "access": str(token.access_token)}
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
-            
+
+class userLoginAPIView(GenericAPIView):
+        permission_classes = (AllowAny,)
+        serializer_class = userLoginSerialiser
+
+        def post(self, request):
+             serialiser = self.get_serializer(data=request.data)
+             if serialiser.is_valid():
+                  user = serialiser.validated_data
+                  serialiser = userSerialiser(user)
+                  token = RefreshToken.for_user(user)
+                  data = serialiser.data
+                  data["tokens"] = {"refresh": str(token),
+                                    "access": str(token.access_token)}
+                  return Response(data, status=status.HTTP_200_OK)
+             return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class userLogoutAPIView(GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+         try:
+              refresh_token = request.data["refresh"]
+              token = RefreshToken(refresh_token)
+              token.blacklist()
+              return Response(status=status.HTTP_205_RESET_CONTENT)
+         except Exception as e:
+              return Response(status=status.HTTP_404_NOT_FOUND)
