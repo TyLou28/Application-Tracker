@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from django.contrib.auth import authenticate
 
 class userSerialiser(serializers.ModelSerializer):
     class Meta:
@@ -28,7 +29,7 @@ class userRegistrationSerialiser(serializers.ModelSerializer):
                 'id': {'read_only': True}}
         
     def validate(self, attrs):
-        if attrs['password1'] != ['password2']:
+        if attrs['password1'] != attrs['password2']:
             raise serializers.ValidationError("Passwords do not match")
         password = attrs.get("password1", "")
         if len(password) < 8:
@@ -40,3 +41,13 @@ class userRegistrationSerialiser(serializers.ModelSerializer):
         validated_data.pop("password2")
 
         return User.objects.create_user(password=password, **validated_data)
+
+class userLoginSerialiser(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Incorrect credentials")
