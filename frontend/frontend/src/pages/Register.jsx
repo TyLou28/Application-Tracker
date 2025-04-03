@@ -12,7 +12,7 @@ export default function Register() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [successMsg, setSuccessMsg] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [error, setError] = useState(null);
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -30,6 +30,13 @@ export default function Register() {
                 body: JSON.stringify(userData),
             });
             const data = await response.json();
+
+            if(!response.ok) {
+                setError(data);
+                throw new Error("Registration Failed");
+            }
+
+            setSuccessMsg("Registration Successful");
             setFormData({
                 first_name: "",
                 last_name: "",
@@ -37,15 +44,27 @@ export default function Register() {
                 password1: "",
                 password2: "",
             });
-            setSuccessMsg("Registration Successful")
-        } catch (err) {
-            console.log(err)
+
+        } catch (error) {
+            console.error("Error: ", error);
+        } finally {
+            setIsLoading(false);
         }
 
     };
 
     return (
         <div>
+            {error && (
+                <div style={{ color: "red" }}>
+                    {Object.keys(error).map((field, index) => (
+                        <p key={index}>{error[field].join(", ")}</p>
+                    ))}
+                </div>
+            )}
+
+            {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
+
             <h2> Register </h2>
             <form>
                 <label>First Name:</label><br/>
