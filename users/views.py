@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -64,3 +64,10 @@ class userLogoutAPIView(GenericAPIView):
               return Response(status=status.HTTP_205_RESET_CONTENT)
          except Exception as e:
               return Response(status=status.HTTP_404_NOT_FOUND)
+
+class userInfoAPIView(RetrieveAPIView):
+     permission_classes = (IsAuthenticated,)
+     serializer_class = userSerialiser
+
+     def get_object(self):
+          return self.request.user
