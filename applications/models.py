@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Applications(models.Model):
 
@@ -12,6 +13,7 @@ class Applications(models.Model):
         ('rejected', 'Rejected'),
     ]
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     company = models.CharField(max_length=200)
     role = models.CharField(max_length=300)
     location = models.CharField(max_length=200, blank=True, null=True)
