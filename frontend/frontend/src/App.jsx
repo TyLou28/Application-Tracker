@@ -1,7 +1,7 @@
 // A state is used to store property values that belong to the component
 // When the state object changes (data), the component re-renders
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './App.css'
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -68,6 +68,7 @@ function App() {
 
       setLoggedIn(false)
       setFirstName("")
+      window.location.reload()
 
     }catch (err) {
       console.error("Logout failed:", err);
@@ -76,22 +77,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Navigation Section */}
-      <header>
-        {isLoggedIn ? (
-          <div>
-            <h4>Hi, {first_name}</h4> | <button onClick={handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <div>
-            <a href="/login">Login</a> | <a href="/register">Register</a>
-          </div>
-        )}
-      </header>
-
       {/* Main Routes */}
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path='/' element={
+          <Layout
+            isLoggedIn={isLoggedIn}
+            first_name={first_name}
+            handleLogout={handleLogout} />}>
           <Route index element={<Home />} />
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
