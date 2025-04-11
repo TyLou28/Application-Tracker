@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
+import '../styles/navbar.css'
 
 export default function Layout({ isLoggedIn, first_name, handleLogout }) {
     return (

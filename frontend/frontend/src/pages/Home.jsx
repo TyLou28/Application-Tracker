@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../App.css'
+import '../styles/application-table.css'
 
 export default function Home() {
     // State to hold application data and function to alter data(setApplications)
@@ -167,7 +168,7 @@ export default function Home() {
                 <button onClick={addApplication}>Add Application</button>
             </div>
 
-            <div>
+            <div className="app-table">
             <table className='application_table'>
                 <thead>
                 <tr>
