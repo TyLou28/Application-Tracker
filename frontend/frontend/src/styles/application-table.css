@@ -1,0 +1,60 @@
+.app-table {
+    margin: auto;
+    width: 50%;
+}
+
+.application_table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .application_table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .application_table th, 
+  .application_table td {
+    padding: 12px 15px;
+  }
+  
+  .application_table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .application_table tbody tr:nth-of-type(even) {
+    background-color: #c4c4c4;
+  }
+  
+  .application_table tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+  }
+  
+  .application_table tbody tr:last-of-type {
+    border-bottom: 4px solid #009879;
+  }
+  
+  .application_table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+  }
+  .application_table tbody tr.active-row button{
+    background-color: #070707;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.5em;
+  }
+  .application_table tbody tr.active-row button:hover{
+    background-color: #333;
+  }

@@ -1,0 +1,35 @@
+.form-wrapper{
+    background: rgba(19, 28, 39, 0.8);
+    width: 100%;
+    color: white;
+    border-radius: 20px;
+}
+
+.form-head{
+    text-align: center;
+    padding: 1rem;
+}
+
+.password-form,
+.email-form{
+    padding: 2rem;
+    text-align: center;
+}
+
+.form-wrapper label {
+    margin: 0rem 3rem;
+}
+
+.form-wrapper button {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.1rem;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-wrapper input{
+    padding: 1rem 3rem;
+}
