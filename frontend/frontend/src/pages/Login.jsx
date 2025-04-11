@@ -1,4 +1,5 @@
 import React, { use, useState } from "react";
+import '../styles/login.css'
 
 export default function Login() {
 
@@ -54,29 +55,37 @@ export default function Login() {
     };
 
     return (
-        <div>
-            {error && (
-                <div style={{ color: "red" }}>
-                    {Object.keys(error).map((field, index) => (
-                        <p key={index}>{error[field].join(", ")}</p>
-                    ))}
-                </div>
-            )}
+        <div className="form-container">
+            <div className="form-wrapper">
+                {error && (
+                    <div style={{ color: "red" }}>
+                        {Object.keys(error).map((field, index) => (
+                            <p key={index}>{error[field].join(", ")}</p>
+                        ))}
+                    </div>
+                )}
 
-            {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
-            <h2> Login </h2>
-            <form>
-                <label>Email:</label><br/>
-                <input type="email" name="email" value={formData.email}
-                placeholder="Email..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <label>Password:</label><br/>
-                <input type="password" name="password" value={formData.password}
-                placeholder="Password..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <br />
-                <button type="submit" disabled={isLoading} onClick={loginUser}>Login</button><br />
-            </form>
+                {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
+                <header className="form-head">
+                    <h2> Sign into your account here </h2>
+                </header>
+                <form>
+                    <div className="email-form">
+                    <label>Email:</label>
+                        <input type="email" name="email" value={formData.email}
+                        placeholder="Email..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input>
+                    </div>
+                    <div className="password-form">
+                        <label>Password:</label>
+                        <input type="password" name="password" value={formData.password}
+                        placeholder="Password..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input>
+                    </div>
+
+                    <button type="submit" disabled={isLoading} onClick={loginUser}>Login</button>
+                </form>
+            </div>
         </div>
     )
 }
