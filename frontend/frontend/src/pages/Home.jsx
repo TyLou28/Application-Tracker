@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../App.css'
-import '../styles/application-table.css'
+import '../styles/home.css'
 
 export default function Home() {
     // State to hold application data and function to alter data(setApplications)
@@ -95,47 +95,49 @@ export default function Home() {
     }
 
     return (
-        <>
-            <h1>Your Application Tracker</h1>
+        <>  
 
-            <div className="app-table">
-            <table className='application_table'>
-                <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Applied Date</th>
-                    <th>Edit Application</th>
-                </tr>
-                </thead>
-                <tbody>
-                {applications.length > 0 ? (
-                    applications.map((job) => (
-                    <tr className='active-row' key={job.id}>
-                        <td>{job.company}</td>
-                        <td>{job.role}</td>
-                        <td>{job.status}</td>
-                        <td>{job.applied_date}</td>
-                        <td>
-                        <input type="text"
-                        value={newStatus}
-                        placeholder='Change status...'
-                        onChange={(e) => setNewStatus(e.target.value)}/>
-                        <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
-                        <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
-                        </td>
-                    </tr>
-                    ))
-                ) : (
-                    <tr>
-                    <td colSpan="4" style={{ textAlign: 'center', padding: '10px', color: '#009879'}}>
-                        You have no current active applications
-                    </td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
+            <div className="container">
+                <h1>Your Application Tracker</h1>
+                <div className="app-table">
+                    <table className='application_table'>
+                        <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Applied Date</th>
+                            <th>Edit Application</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {applications.length > 0 ? (
+                            applications.map((job) => (
+                            <tr className='active-row' key={job.id}>
+                                <td>{job.company}</td>
+                                <td>{job.role}</td>
+                                <td>{job.status}</td>
+                                <td>{job.applied_date}</td>
+                                <td>
+                                <input type="text"
+                                value={newStatus}
+                                placeholder='Change status...'
+                                onChange={(e) => setNewStatus(e.target.value)}/>
+                                <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
+                                <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
+                                </td>
+                            </tr>
+                            ))
+                        ) : (
+                            <tr>
+                            <td colSpan="4" style={{ textAlign: 'center', padding: '10px', color: '#009879'}}>
+                                You have no current active applications
+                            </td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     );
