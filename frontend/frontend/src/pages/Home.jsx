@@ -96,7 +96,6 @@ export default function Home() {
 
     return (
         <>  
-
             <div className="container">
                 <h1>Your Application Tracker</h1>
                 <div className="app-table">
