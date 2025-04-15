@@ -37,6 +37,11 @@
     font-weight: bold;
     cursor: pointer;
   }
+
+  .navbar a:hover {
+    color: #4c6e97;
+    text-decoration: underline;
+  }
   
   .nav-right button:hover {
     background: #0e2036;
