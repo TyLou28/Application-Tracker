@@ -14,9 +14,9 @@ export default function Layout({ isLoggedIn, first_name, handleLogout }) {
                     <div className="nav-right">
                         {isLoggedIn ? (
                             <>
-                                <span>Hi, {first_name}</span>
+                                <span>Hi, {first_name} |</span>
+                                <Link to="/new-entry">Add Application |</Link>
                                 <button onClick={handleLogout}>Logout</button>
-                                <Link to="/new-entry">Add Application</Link>
                             </> 
                             ) : (
                             <>

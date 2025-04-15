@@ -129,7 +129,7 @@ export default function Home() {
                             ))
                         ) : (
                             <tr>
-                            <td colSpan="4" style={{ textAlign: 'center', padding: '10px', color: '#009879'}}>
+                            <td colSpan="5" style={{ textAlign: 'center', padding: '10px', color: '#009879'}}>
                                 You have no current active applications
                             </td>
                             </tr>
