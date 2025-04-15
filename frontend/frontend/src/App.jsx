@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Layout from './pages/Layout';
+import NewEntry from './pages/NewEntry';
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
+          <Route path='new-entry' element={<NewEntry />} />
         </Route>
       </Routes>
     </BrowserRouter>
