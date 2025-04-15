@@ -85,7 +85,7 @@ function App() {
             isLoggedIn={isLoggedIn}
             first_name={first_name}
             handleLogout={handleLogout} />}>
-          <Route index element={<Home />} />
+          <Route index element={<Home isLoggedIn={isLoggedIn}/>} />
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
           <Route path='new-entry' element={<NewEntry />} />
