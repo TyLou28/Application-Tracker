@@ -42,51 +42,6 @@ export default function Home() {
         }
     }
 
-    // Used to add the data with post request to the endpoint 
-    const addApplication = async () => {
-        const token = localStorage.getItem("accessToken");  // Retrieve stored token
-    
-        const appData = {
-            company,
-            role,
-            location,
-            salary,
-            status,
-            applied_date,
-        };
-    
-        try {
-            const response = await fetch("http://localhost:8000/applications/create_application", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`  // Include the auth token
-                },
-                body: JSON.stringify(appData),
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json(); // Get detailed error message from backend
-                console.error("Error from backend:", errorData);
-                throw new Error("Failed to add application");
-            }
-    
-            const data = await response.json();
-    
-            // Update UI with new application
-            setApplications((prev) => [...prev, data]);
-    
-            // Clear form fields
-            setCompany('');
-            setRole('');
-            setLocation('');
-            setSalary('');
-            setStatus('');
-        } catch (err) {
-            console.error("Error:", err);
-        }
-    };
-
     // Function to update the status specifically
     // We pass in the primary key to update the specific application
     // We also pass in the other elements we dont want to update
@@ -142,31 +97,6 @@ export default function Home() {
     return (
         <>
             <h1>Your Application Tracker</h1>
-
-            <div className="new-app-input">
-                <input type="text"
-                value={company}
-                placeholder='Company Name...'
-                onChange={(e) => setCompany(e.target.value)} />
-                <input type="text"
-                value={role}
-                placeholder='Role Name...'
-                onChange={(e) => setRole(e.target.value)} />
-                <input type="text"
-                value={location}
-                placeholder='Name of Location...'
-                onChange={(e) => setLocation(e.target.value)} />
-                <input type="text"
-                value={salary}
-                placeholder='Salary...'
-                onChange={(e) => setSalary(e.target.value)} />
-                <input type="text"
-                value={status}
-                placeholder='Status...'
-                onChange={(e) => setStatus(e.target.value)} />
-                <br /> <br />
-                <button onClick={addApplication}>Add Application</button>
-            </div>
 
             <div className="app-table">
             <table className='application_table'>
