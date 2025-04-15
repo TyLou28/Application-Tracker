@@ -16,6 +16,7 @@ export default function Layout({ isLoggedIn, first_name, handleLogout }) {
                             <>
                                 <span>Hi, {first_name}</span>
                                 <button onClick={handleLogout}>Logout</button>
+                                <Link to="/new-entry">Add Application</Link>
                             </> 
                             ) : (
                             <>
