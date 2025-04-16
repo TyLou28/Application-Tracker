@@ -1,9 +1,18 @@
+.form-container p {
+    color: green;
+    text-align: center;
+}
+
 .form-wrapper{
     background: rgba(19, 28, 39, 0.8);
     width: 100%;
     color: white;
     border-radius: 20px;
     font-size: 2rem;
+}
+
+.form-wrapper .errormsg p {
+    color: red;
 }
 
 .form-head{

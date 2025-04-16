@@ -58,14 +58,14 @@ export default function Login() {
         <div className="form-container">
             <div className="form-wrapper">
                 {error && (
-                    <div style={{ color: "red" }}>
+                    <div className="errormsg">
                         {Object.keys(error).map((field, index) => (
                             <p key={index}>{error[field].join(", ")}</p>
                         ))}
                     </div>
                 )}
 
-                {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
+                {successMsg && <p>{successMsg}</p>}
                 <header className="form-head">
                     <h2> Sign into your account here </h2>
                 </header>
