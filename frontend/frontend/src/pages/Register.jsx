@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-
+import '../styles/register.css'
 export default function Register() {
 
     const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ export default function Register() {
     };
 
     return (
-        <div>
+        <div className="registerform-wrapper">
             {error && (
                 <div style={{ color: "red" }}>
                     {Object.keys(error).map((field, index) => (
@@ -65,30 +65,47 @@ export default function Register() {
 
             {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
 
-            <h2> Register </h2>
+            <header className="form-head">
+                <h2> Register </h2>
+            </header>
+ 
             <form>
-                <label>First Name:</label><br/>
-                <input type="text" name="first_name" value={formData.first_name}
-                placeholder="First name..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <label>Last Name:</label><br/>
-                <input type="text" name="last_name" value={formData.last_name}
-                placeholder="Last Name..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <label>Email:</label><br/>
-                <input type="email" name="email" value={formData.email}
-                placeholder="Email..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <label>Password:</label><br/>
-                <input type="password" name="password1" value={formData.password1}
-                placeholder="Password..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <label>Confirm Password:</label><br/>
-                <input type="password" name="password2" value={formData.password2}
-                placeholder="Re-Enter Password..."
-                onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input><br />
-                <br />
-                <button type="submit" disabled={isLoading} onClick={registerUser}>Register</button><br />
+                <div className="form-group">
+                    <label>First Name:</label>
+                    <input type="text" name="first_name" value={formData.first_name}
+                        placeholder="First name..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                </div>
+
+                <div className="form-group">
+                    <label>Last Name:</label>
+                    <input type="text" name="last_name" value={formData.last_name}
+                        placeholder="Last Name..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                </div>
+
+                <div className="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" value={formData.email}
+                        placeholder="Email..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                </div>
+
+                <div className="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password1" value={formData.password1}
+                        placeholder="Password..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                </div>
+
+                <div className="form-group">
+                    <label>Confirm Password:</label>
+                    <input type="password" name="password2" value={formData.password2}
+                        placeholder="Re-Enter Password..."
+                        onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                </div>
+
+                <button type="submit" disabled={isLoading} onClick={registerUser}>Register</button>
             </form>
         </div>
     )

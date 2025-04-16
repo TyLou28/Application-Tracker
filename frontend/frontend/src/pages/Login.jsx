@@ -56,7 +56,7 @@ export default function Login() {
 
     return (
         <div className="form-container">
-            <div className="form-wrapper">
+            <div className="loginform-wrapper">
                 {error && (
                     <div className="errormsg">
                         {Object.keys(error).map((field, index) => (
@@ -71,7 +71,7 @@ export default function Login() {
                 </header>
                 <form>
                     <div className="email-form">
-                    <label>Email:</label>
+                        <label>Email:</label>
                         <input type="email" name="email" value={formData.email}
                         placeholder="Email..."
                         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}></input>
