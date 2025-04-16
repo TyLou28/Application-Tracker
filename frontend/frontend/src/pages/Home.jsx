@@ -5,15 +5,7 @@ import '../styles/home.css'
 export default function Home({ isLoggedIn }) {
     // State to hold application data and function to alter data(setApplications)
     const [applications, setApplications] = useState([]);
-    const [company, setCompany] = useState("")
-    const [role, setRole] = useState("")
-    const [location, setLocation] = useState("")
-    const [salary, setSalary] = useState("")
-    const [status, setStatus] = useState("")
-    const [applied_date, setApplied_date] = useState("")
-
     const [newStatus, setNewStatus] = useState("")
-
 
     useEffect(() => {
         fetchApplications();
@@ -142,7 +134,8 @@ export default function Home({ isLoggedIn }) {
                     </>
                 ) : (
                     <>
-                        <h1> Create an account or Login to your existing account to start!</h1>
+                        <h1>The tracking, updating, and reminding website for job applications, made for students and recent graduates</h1>
+                        <h2> Create an account or Login to your existing account to start!</h2>
                     </>
                 )}
 
