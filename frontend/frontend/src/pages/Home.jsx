@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import '../App.css'
 import '../styles/home.css'
 
@@ -135,7 +136,7 @@ export default function Home({ isLoggedIn }) {
                 ) : (
                     <>
                         <h1>The tracking, updating, and reminding website for job applications, made for students and recent graduates</h1>
-                        <h2> Create an account or Login to your existing account to start!</h2>
+                        <h2> <Link to="/register">Create an account</Link> or <Link to="/login">Login to your existing account</Link> to start!</h2>
                     </>
                 )}
 
