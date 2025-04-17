@@ -73,7 +73,7 @@ function App() {
 
       setLoggedIn(false)
       setFirstName("")
-      window.location.reload()
+      window.location.href = "/"
 
     }catch (err) {
       console.error("Logout failed:", err);
