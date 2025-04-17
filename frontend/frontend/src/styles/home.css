@@ -25,14 +25,14 @@ h2 {
 
 .app-table {
     margin: auto;
-    width: 100%;
+    width: 80%;
     overflow: hidden;
 }
 
 .app-table .application_table {
     border-collapse: collapse;
     margin: 25px 0;
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);

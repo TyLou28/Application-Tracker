@@ -20,7 +20,7 @@ export default function Layout({ isLoggedIn, first_name, handleLogout }) {
                             </> 
                             ) : (
                             <>
-                                <Link to="/login">Login</Link>
+                                <Link to="/login">Login |</Link>
                                 <Link to="/register">Register</Link>
                             </>
                         )}
