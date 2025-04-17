@@ -18,6 +18,10 @@ function App() {
 
   useEffect(() => {
       checkLoggedIn();
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        setLoggedIn(true)
+      }
   }, []);
 
     const checkLoggedIn = async () => {
