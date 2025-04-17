@@ -19,6 +19,11 @@
     text-align: center;
     padding: 4rem;
 }
+
+.form-head h2 {
+    color: white;
+}
+
 .loginform-wrapper
 .password-form,
 .email-form{
