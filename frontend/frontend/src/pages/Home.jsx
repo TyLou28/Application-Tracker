@@ -6,7 +6,8 @@ import '../styles/home.css'
 export default function Home({ isLoggedIn }) {
     // State to hold application data and function to alter data(setApplications)
     const [applications, setApplications] = useState([]);
-    const [newStatus, setNewStatus] = useState("")
+    const [newStatus, setNewStatus] = useState("");
+    const [statusError, setStatusError] = useState({});
 
     useEffect(() => {
         fetchApplications();
@@ -57,6 +58,19 @@ export default function Home({ isLoggedIn }) {
         });
         const data = await response.json();
 
+        if (!response.ok) {
+            setStatusError((prev) => ({
+                ...prev,
+                [pk]: data.status || data.detail || "Unknown Error",
+            }));
+            return;
+        }
+
+        setStatusError((prev) => ({
+            ...prev,
+            [pk]: null,
+          }));
+
         // Loop through all of the applications
         // If the job id matches the pk, return the new data
         // Otherwise, return the current application
@@ -72,6 +86,10 @@ export default function Home({ isLoggedIn }) {
         setNewStatus('');
         } catch (err) {
         console.log(err)
+        setStatusError((prev) => ({
+            ...prev,
+            [pk]: "Something went wrong"
+          }));
         }
     }
 
@@ -113,12 +131,18 @@ export default function Home({ isLoggedIn }) {
                                         <td>{job.status}</td>
                                         <td>{job.applied_date}</td>
                                         <td>
-                                        <input type="text"
-                                        value={newStatus}
-                                        placeholder='Change status...'
-                                        onChange={(e) => setNewStatus(e.target.value)}/>
-                                        <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
-                                        <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
+                                            <input type="text"
+                                            value={newStatus}
+                                            placeholder='Change status...'
+                                            onChange={(e) => setNewStatus(e.target.value)}
+                                            />
+                                            <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
+                                            <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
+                                            {statusError[job.id] && (
+                                                <div style={{ color: 'red', marginTop: '5px' }}>
+                                                {statusError[job.id]}
+                                                </div>
+                                            )}
                                         </td>
                                     </tr>
                                     ))
