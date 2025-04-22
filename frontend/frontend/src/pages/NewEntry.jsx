@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../App.css'
+import '../styles/newEntry.css'
 
 export default function NewEntry() {
     const [applications, setApplications] = useState([]);
@@ -57,35 +58,49 @@ export default function NewEntry() {
     };
 
     return (
-        <>
-        
-        <h1>Add a new application</h1>
+        <div className="application-form-wrapper">
+            <header className="form-head">
+                <h2>Add a new application</h2>
+            </header>
 
-        <div className="new-app-input">
-                <input type="text"
-                value={company}
-                placeholder='Company Name...'
-                onChange={(e) => setCompany(e.target.value)} />
-                <input type="text"
-                value={role}
-                placeholder='Role Name...'
-                onChange={(e) => setRole(e.target.value)} />
-                <input type="text"
-                value={location}
-                placeholder='Name of Location...'
-                onChange={(e) => setLocation(e.target.value)} />
-                <input type="text"
-                value={salary}
-                placeholder='Salary...'
-                onChange={(e) => setSalary(e.target.value)} />
-                <input type="text"
-                value={status}
-                placeholder='Status...'
-                onChange={(e) => setStatus(e.target.value)} />
-                <br /> <br />
+            <form>
+                <div className="form-group">
+                    <label>Company Name:</label>
+                    <input type="text"
+                    value={company}
+                    placeholder='Company Name...'
+                    onChange={(e) => setCompany(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Role:</label>
+                    <input type="text"
+                    value={role}
+                    placeholder='Role Name...'
+                    onChange={(e) => setRole(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Location:</label>
+                    <input type="text"
+                    value={location}
+                    placeholder='Name of Location...'
+                    onChange={(e) => setLocation(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Salary:</label>
+                    <input type="text"
+                    value={salary}
+                    placeholder='Salary...'
+                    onChange={(e) => setSalary(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label>Application Status:</label>
+                    <input type="text"
+                    value={status}
+                    placeholder='Status...'
+                    onChange={(e) => setStatus(e.target.value)} />
+                </div>
                 <button onClick={addApplication}>Add Application</button>
-            </div>
-
-        </>
+            </form>
+        </div>
     )
 }
