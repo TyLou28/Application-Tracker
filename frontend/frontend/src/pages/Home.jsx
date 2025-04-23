@@ -106,66 +106,21 @@ export default function Home({ isLoggedIn }) {
     }
 
     return (
-        <>  
+        <section className="home-hero">  
             <div className="container">
+                <h1>The tracking, updating, and reminding website for job applications, made for students and recent graduates</h1>
                 {isLoggedIn ? (
                     <>
-                        <h1>Your Application Tracker</h1>
-                        <div className="app-table">
-                            <table className='application_table'>
-                                <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Applied Date</th>
-                                    <th>Edit Application</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {applications.length > 0 ? (
-                                    applications.map((job) => (
-                                    <tr className='active-row' key={job.id}>
-                                        <td>{job.company}</td>
-                                        <td>{job.role}</td>
-                                        <td>{job.status}</td>
-                                        <td>{job.applied_date}</td>
-                                        <td>
-                                            <input type="text"
-                                            value={newStatus}
-                                            placeholder='Change status...'
-                                            onChange={(e) => setNewStatus(e.target.value)}
-                                            />
-                                            <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
-                                            <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
-                                            {statusError[job.id] && (
-                                                <div style={{ color: 'red', marginTop: '5px' }}>
-                                                {statusError[job.id]}
-                                                </div>
-                                            )}
-                                        </td>
-                                    </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                    <td colSpan="5" style={{ textAlign: 'center', padding: '10px', color: '#009879'}}>
-                                        You have no current active applications
-                                    </td>
-                                    </tr>
-                                )}
-                                </tbody>
-                            </table>
-                        </div>
+
                     </>
                 ) : (
                     <>
-                        <h1>The tracking, updating, and reminding website for job applications, made for students and recent graduates</h1>
                         <h2> <Link to="/register">Create an account</Link> or <Link to="/login">Login to your existing account</Link> to start!</h2>
                     </>
                 )}
 
             </div>
-        </>
+        </section>
     );
 }
 

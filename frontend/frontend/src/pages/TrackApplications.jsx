@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import '../App.css'
-import '../styles/home.css'
+import '../styles/applicationTable.css'
 export default function TrackApplications() {
     const [applications, setApplications] = useState([]);
     const [newStatus, setNewStatus] = useState("");
