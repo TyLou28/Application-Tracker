@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Layout from './pages/Layout';
 import NewEntry from './pages/NewEntry';
+import TrackApplications from './pages/TrackApplications';
 
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
           <Route path='new-entry' element={<NewEntry />} />
+          <Route path='track-applications' element={<TrackApplications />} />
         </Route>
       </Routes>
     </BrowserRouter>
