@@ -15,15 +15,16 @@ export default function Layout({ isLoggedIn, first_name, handleLogout }) {
                         {isLoggedIn ? (
                             <>
                                 <span>Hi, {first_name} |</span>
+                                <Link to="/track-applications">Track Applications</Link>
                                 <Link to="/new-entry">Add Application</Link>
                                 <span>|</span>
                                 <button onClick={handleLogout}>Logout</button>
                             </> 
                             ) : (
                             <>
-                                <Link to="/login">Login</Link>
+                                <Link to="/register">Sign Up</Link>
                                 <span>|</span>
-                                <Link to="/register">Register</Link>
+                                <Link to="/login">Login</Link>
                             </>
                         )}
                     </div>
