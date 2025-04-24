@@ -38,6 +38,8 @@
   
   .app-table .application_table tbody tr:nth-of-type(odd) {
     background-color: #ffffff;
+    border-left: 1px solid #009879;
+    border-right: 1px solid #009879;
   }
   
   .app-table .application_table tbody tr:last-of-type {
