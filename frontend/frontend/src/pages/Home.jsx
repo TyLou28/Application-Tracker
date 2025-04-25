@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import '../App.css'
 import '../styles/home.css'
 
-export default function Home({ isLoggedIn }) {
+export default function Home({ isLoggedIn, first_name }) {
     // State to hold application data and function to alter data(setApplications)
     const [applications, setApplications] = useState([]);
     const [newStatus, setNewStatus] = useState("");
@@ -112,9 +112,10 @@ export default function Home({ isLoggedIn }) {
                 <h2>Efficiently Track & Organise <br /> Your Applications</h2>
                 <h1>Made for students and graduates alike</h1>
                 {isLoggedIn ? (
-                    <>
-
-                    </>
+                    <div className="about-user-in">
+                        <p>Welcome Back, {first_name}!</p>
+                        <Link to="/track-applications"><button>View Your Applications</button></Link>
+                    </div>
                 ) : (
                     <div className="about-user-out">
                         <Link to="/register"><button>Sign Up</button></Link>

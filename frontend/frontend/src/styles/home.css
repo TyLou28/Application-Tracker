@@ -67,7 +67,7 @@ p {
 .about-app h2 {
   padding-left: 5rem;
   padding-right: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 2rem;
 }
 
 .about-app p {
@@ -93,6 +93,33 @@ p {
 .about-app .about-user-out button:focus{
   transform: translateZ(10px) translateY(-10px);
   box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-user-in {
+  margin-top: 4rem;
+}
+
+.about-app .about-user-in button {
+  margin-top: 1.5rem;
+  border-radius: 1.5rem;
+  background-color: rgb(233, 187, 59);
+  color: black;
+  transition: transform 750ms;
+  will-change: transform;
+  font-weight: bold;
+}
+
+.about-app .about-user-in button:hover,
+.about-app .about-user-in button:focus{
+  transform: translateZ(10px) translateY(-10px);
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-user-in p{
+  
+  font-weight: bold;
+  padding-bottom: 0rem;
+  padding-top: 5rem;
 }
 
 @keyframes opening {
