@@ -51,7 +51,7 @@ export default function NewEntry() {
             setLocation('');
             setSalary('');
             setStatus('');
-            window.location.href = "/"
+            window.location.href = "track-applications"
         } catch (err) {
             console.error("Error:", err);
         }

@@ -1,3 +1,7 @@
+.container h1 {
+  text-align: center;
+}
+
 .app-table {
     margin: auto;
     width: 80%;
