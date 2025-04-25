@@ -50,4 +50,4 @@ class userLoginSerialiser(serializers.Serializer):
         user = authenticate(**data)
         if user and user.is_active:
             return user
-        raise serializers.ValidationError("Incorrect credentials")
+        raise serializers.ValidationError("Either your Email or Password are Incorrect ")
