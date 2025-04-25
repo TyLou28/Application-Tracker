@@ -20,6 +20,7 @@ class Applications(models.Model):
     salary = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=50, choices=JOB_STATUS, default='Applied')
     applied_date = models.DateField(auto_now_add=True)
+    notes = models.CharField(max_length=10000, blank=True, null=True)
     
 
     def __str__(self):

@@ -45,3 +45,19 @@ def user_applications(request):
     applications = Applications.objects.filter(user=user)
     serializer = ApplicationsSerialiser(applications, many=True)
     return Response(serializer.data)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_notes(request, pk):
+    try:
+        application = Applications.objects.get(pk=pk)
+    except Applications.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    notes = request.data.get('notes')
+    if notes is not None:
+        application.notes = notes
+        application.save()
+        return Response(status=status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
