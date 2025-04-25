@@ -107,19 +107,22 @@ export default function Home({ isLoggedIn }) {
 
     return (
         <section className="home-hero">  
-            <div className="container">
-                <h1>The tracking, updating, and reminding website for job applications, made for students and recent graduates</h1>
+            <div className="about-app flex">
+                <p>The Application Tracker</p>
+                <h2>Efficiently Track & Organise <br /> Your Applications</h2>
+                <h1>Made for students and graduates alike</h1>
                 {isLoggedIn ? (
                     <>
 
                     </>
                 ) : (
-                    <>
-                        <h2> <Link to="/register">Create an account</Link> or <Link to="/login">Login to your existing account</Link> to start!</h2>
-                    </>
+                    <div className="about-user-out">
+                        <Link to="/register"><button>Sign Up</button></Link>
+                    </div>
                 )}
-
             </div>
+            <div className="about-image">
+            </div> 
         </section>
     );
 }
