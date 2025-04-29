@@ -79,6 +79,7 @@ p {
   margin-top: 7.5rem;
   margin-left: 5rem;
   margin-right: 3rem;
+  border: 3px solid black;
 }
 
 .about-app .about-user-out button {
