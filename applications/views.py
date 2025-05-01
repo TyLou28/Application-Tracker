@@ -47,7 +47,6 @@ def user_applications(request):
     return Response(serializer.data)
 
 @api_view(['PATCH'])
-@permission_classes([IsAuthenticated])
 def update_notes(request, pk):
     try:
         application = Applications.objects.get(pk=pk)

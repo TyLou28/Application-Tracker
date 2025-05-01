@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Layout from './pages/Layout';
 import NewEntry from './pages/NewEntry';
 import TrackApplications from './pages/TrackApplications';
+import Notes from './pages/Notes';
 
 
 function App() {
@@ -94,7 +95,8 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
           <Route path='new-entry' element={<NewEntry />} />
-          <Route path='track-applications' element={<TrackApplications />} />
+          <Route path='track-applications' element={<TrackApplications /> } />
+          <Route path='track-applications/applications/:id/notes' element={<Notes />}/>
         </Route>
       </Routes>
     </BrowserRouter>

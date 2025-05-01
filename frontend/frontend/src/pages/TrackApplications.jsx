@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import '../App.css'
 import '../styles/applicationTable.css'
 export default function TrackApplications() {
     const [applications, setApplications] = useState([]);
     const [newStatus, setNewStatus] = useState("");
     const [statusError, setStatusError] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchApplications();
@@ -132,6 +134,7 @@ export default function TrackApplications() {
                                 />
                                 <button onClick={() => updateStatus(job.id, job.company, job.role, job.location, job.salary)}>Change Status</button>
                                 <button onClick={() => deleteApplication(job.id)}> Delete Appplication</button>
+                                <button onClick={() => navigate(`/track-applications/applications/${job.id}/notes`)}> View Notes </button>
                                 {statusError[job.id] && (
                                     <div style={{ color: 'red', marginTop: '5px' }}>
                                     {statusError[job.id]}
