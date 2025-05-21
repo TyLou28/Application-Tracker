@@ -1,7 +1,11 @@
+import { Navbar } from "../components/Navbar"
+import { ToggleTheme } from "../components/ToggleTheme"
+
 export const Home = () => {
     return (
-        <div className="">
-            <h2>Home</h2>
+        <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+            <ToggleTheme />
+            <Navbar />
         </div>
     )
 }
