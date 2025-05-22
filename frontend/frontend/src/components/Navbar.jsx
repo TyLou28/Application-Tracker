@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils.js"
 import { MenuIcon, X } from "lucide-react"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 const navItems = [
     {name: "Home", href: "#hero"},
     {name: "View Applications", href: "#view-application"},
-    {name: "Login", href: "#login"},
+    {name: "Login", href: "/login"},
     {name: "Sign Up", href: "#sign-up"},
 
 ]
@@ -38,9 +39,9 @@ export const Navbar = () => {
                 {/* Desktop navbar */}
                 <div className="hidden md:flex space-x-8">
                     {navItems.map((item, key) => (
-                        <a key={key} href={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
+                        <Link key={key} to={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
                             {item.name}
-                        </a>
+                        </Link>
                     ))}
                 </div>
 

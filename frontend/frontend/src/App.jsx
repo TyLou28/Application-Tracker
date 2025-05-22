@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { Login } from './pages/Login';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         {/* Main Routes */}
         <Routes>
           <Route index element={<Home />}/>
+          <Route path='login' element={<Login />}/>
           <Route path='*' element={<NotFound />}/>
         </Routes>
       </BrowserRouter>

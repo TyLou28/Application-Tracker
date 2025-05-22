@@ -1,4 +1,5 @@
 import { Notebook, NotebookPen, Pen } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export const AboutSection = () => {
     return (
@@ -32,9 +33,9 @@ export const AboutSection = () => {
                                 Register
                             </a>
 
-                            <a href="login" className="button-one">
+                            <Link to="/login" className="button-one">
                                 Log In
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
