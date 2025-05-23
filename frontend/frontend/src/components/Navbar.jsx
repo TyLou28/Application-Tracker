@@ -3,9 +3,13 @@ import { MenuIcon, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-const navItems = [
+const loggedInNavItems = [
     {name: "Home", href: "/"},
     {name: "View Applications", href: "#view-application"},
+]
+
+const navItems = [
+    {name: "Home", href: "/"},
     {name: "Login", href: "/login"},
     {name: "Sign Up", href: "#sign-up"},
 
@@ -15,14 +19,80 @@ export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+    const [LoggedIn, setLoggedIn] = useState(false)
+    const [firstName, setFirstName] = useState("")
+
     useEffect(() => {
+        checkLoggedIn()
+        const token = localStorage.getItem("accessToken")
+        if (token) {
+            setLoggedIn(true)
+        }
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10)
         }
         window.addEventListener("scroll", handleScroll)
 
         return () => window.removeEventListener("scroll", handleScroll)
+
     }, [])
+
+    const checkLoggedIn = async () => {
+        try {
+            const token = localStorage.getItem("accessToken");
+  
+            if (token) {
+                const response = await fetch("http://localhost:8000/user", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+  
+                if (!response.ok) {
+                    throw new Error("Failed to authenticate user");
+                }
+  
+                const data = await response.json();
+                setLoggedIn(true);
+                setFirstName(data.first_name); // Correctly accessing first name
+            } else {
+                setLoggedIn(false);
+                setFirstName("");
+            }
+        } catch (err) {
+            console.error("Error:", err);
+            setLoggedIn(false);
+            setFirstName("");
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+          const refreshToken = localStorage.getItem("refreshToken");
+          if (refreshToken) {
+            await fetch("http://localhost:8000/users/logout", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ refresh: refreshToken }),
+            });
+          }
+    
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+    
+          setLoggedIn(false)
+          setFirstName("")
+          window.location.href = "/"
+    
+        }catch (err) {
+          console.error("Logout failed:", err);
+        }
+      };
 
     return ( 
         <nav className={cn("fixed w-full z-40 transition-all duration-300",
@@ -38,11 +108,27 @@ export const Navbar = () => {
 
                 {/* Desktop navbar */}
                 <div className="hidden md:flex space-x-8">
-                    {navItems.map((item, key) => (
-                        <Link key={key} to={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
-                            {item.name}
-                        </Link>
-                    ))}
+                    {LoggedIn ? (
+                        <>
+                            <h1 className="text-foreground/80 duration 300">
+                                Hi, <span className="text-primary font-bold">{firstName}</span>
+                            </h1>
+                            {loggedInNavItems.map((item, key) => (
+                                <Link key={key} to={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
+                                    {item.name}
+                                </Link>
+                            ))}
+                            <button className="button-one px-3 py-1 cursor-pointer duration 300" onClick={handleLogout}>Logout</button>                        
+                        </>
+                    ) : (
+                        <>
+                            {navItems.map((item, key) => (
+                                <Link key={key} to={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </>
+                    )}
                 </div>
 
                 {/* Phone navbar */}
@@ -58,14 +144,28 @@ export const Navbar = () => {
                     : "opacity-0 pointer-events-none"
                     )}>
                     <div className="flex flex-col space-y-8 text-xl">
-                        {navItems.map((item, key) => (
-                            <Link key={key}
-                            to={item.href} 
-                            className="text-foreground/80 hover:text-primary transition-colors duration 300"
-                            onClick={() => setIsMenuOpen(false)}>
-                                {item.name}
-                            </Link>
-                        ))}
+                        {LoggedIn ? (
+                            <>
+                                {loggedInNavItems.map((item, key) => (
+                                    <Link key={key} to={item.href} className="text-foreground/80 hover:text-primary transition-colors duration 300">
+                                        {item.name}
+                                    </Link>
+                                ))}
+                                <button className="button-one duration 300" onClick={handleLogout}>Logout</button>                                   
+                            </>
+                        ): (
+                            <>
+                                {navItems.map((item, key) => (
+                                    <Link key={key}
+                                    to={item.href} 
+                                    className="text-foreground/80 hover:text-primary transition-colors duration 300"
+                                    onClick={() => setIsMenuOpen(false)}>
+                                        {item.name}
+                                    </Link>
+                                ))}                            
+                            </>
+                        )}
+
                     </div>
                 </div>
             </div>
