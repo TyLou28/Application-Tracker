@@ -35,9 +35,9 @@ export const ToggleTheme = () => {
         )}>
         {" "}
         {isDarkMode ? (
-            <Sun className="h-6 w-6 text-yellow-300"/>
+            <Sun className="h-6 w-6 text-yellow-300 cursor-pointer"/>
         ) : (
-            <Moon className="h-6 w-6 text-blue-900"/>
+            <Moon className="h-6 w-6 text-blue-900 cursor-pointer"/>
         )} 
         </button>
     )

@@ -75,7 +75,7 @@ export const LoginFormSection = () => {
                             onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
                         </div>
 
-                        <button disabled={isSubmitting} type="submit" className={cn("button-one w-full flex items-center justify-center gap-2 mt-12")}>
+                        <button disabled={isSubmitting} type="submit" className={cn("button-one w-full flex items-center justify-center gap-2 mt-12 cursor-pointer")}>
                             {isSubmitting ? <LoaderPinwheel /> : <LogIn size={25}/>}
                             
                         </button>
