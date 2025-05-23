@@ -1,7 +1,14 @@
+import { LoginFormSection } from "../components/LoginFormSection"
+import { Navbar } from "../components/Navbar"
+
 export const Login = () => {
     return (
         <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-            <h1>login</h1>
+            <Navbar />
+
+            <main>
+                <LoginFormSection />
+            </main>
         </div>
     )
 }
