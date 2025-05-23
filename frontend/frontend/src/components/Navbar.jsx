@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const navItems = [
-    {name: "Home", href: "#hero"},
+    {name: "Home", href: "/"},
     {name: "View Applications", href: "#view-application"},
     {name: "Login", href: "/login"},
     {name: "Sign Up", href: "#sign-up"},
@@ -30,11 +30,11 @@ export const Navbar = () => {
         )}>
 
             <div className="container flex items-center justify-between">
-                <a className="text-xl font-bold text-primary flex items-center" href="#hero">
+                <Link className="text-xl font-bold text-primary flex items-center" to="/">
                     <span className="ml-5 relative z-10">
                         <span className="text-glow text-foreground">Application</span> Tracker
                     </span>
-                </a>
+                </Link>
 
                 {/* Desktop navbar */}
                 <div className="hidden md:flex space-x-8">
@@ -59,12 +59,12 @@ export const Navbar = () => {
                     )}>
                     <div className="flex flex-col space-y-8 text-xl">
                         {navItems.map((item, key) => (
-                            <a key={key}
-                            href={item.href} 
+                            <Link key={key}
+                            to={item.href} 
                             className="text-foreground/80 hover:text-primary transition-colors duration 300"
                             onClick={() => setIsMenuOpen(false)}>
                                 {item.name}
-                            </a>
+                            </Link>
                         ))}
                     </div>
                 </div>
