@@ -11,7 +11,7 @@ const loggedInNavItems = [
 const navItems = [
     {name: "Home", href: "/"},
     {name: "Login", href: "/login"},
-    {name: "Sign Up", href: "#sign-up"},
+    {name: "Sign Up", href: "/register"},
 
 ]
 
@@ -23,16 +23,12 @@ export const Navbar = () => {
     const [firstName, setFirstName] = useState("")
 
     useEffect(() => {
-        checkLoggedIn()
-        const token = localStorage.getItem("accessToken")
-        if (token) {
-            setLoggedIn(true)
-        }
-
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10)
         }
         window.addEventListener("scroll", handleScroll)
+
+        checkLoggedIn()
 
         return () => window.removeEventListener("scroll", handleScroll)
 

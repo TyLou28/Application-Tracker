@@ -52,7 +52,7 @@ export const LoginFormSection = () => {
     return (
         <section className="py-24 px-4 relative bg-secondary/30">
             <div className="container mx-auto max-w-5xl">
-                <h2 className="text-3x; md:text-4xl font-bold mb-16 text-center text-primary opacity-0 animate-fade-in-delay-1">
+                <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-primary opacity-0 animate-fade-in-delay-1">
                     Have an account, Sign in here
                 </h2>
 
