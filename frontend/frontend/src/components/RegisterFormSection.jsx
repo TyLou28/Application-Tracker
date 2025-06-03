@@ -96,7 +96,7 @@ export const RegisterFormSection = () => {
                                 onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}/>
                             </div>
                             <div>
-                                <label htmlFor="password" className="block text-sm font-medium mb-2">Confrim Password</label>
+                                <label htmlFor="password" className="block text-sm font-medium mb-2">Confirm Password</label>
                                 <input type="text" id="password" name="password2" required value={formData.password2}
                                 className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                                 placeholder="Retype Password..."
