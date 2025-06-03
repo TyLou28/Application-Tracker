@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { ViewApplications } from './pages/ViewApplications';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<Home />}/>
           <Route path='login' element={<Login />}/>
           <Route path='register' element={<Register />}/>
+          <Route path='view-applications' element={<ViewApplications />} />
           <Route path='*' element={<NotFound />}/>
         </Routes>
       </BrowserRouter>

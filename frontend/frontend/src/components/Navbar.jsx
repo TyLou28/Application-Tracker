@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils.js"
-import { MenuIcon, X } from "lucide-react"
+import { LogOut, MenuIcon, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const loggedInNavItems = [
     {name: "Home", href: "/"},
-    {name: "View Applications", href: "#view-application"},
+    {name: "View Applications", href: "/view-applications"},
 ]
 
 const navItems = [
