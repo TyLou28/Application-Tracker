@@ -1,3 +1,4 @@
+import { Edit, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react"
 
 export const ApplicationTableSection = () => {
@@ -28,7 +29,20 @@ export const ApplicationTableSection = () => {
         } catch (err) {
             console.log(err)
         }
-    } 
+    }
+    
+    const deleteApplication = async (pk) => {
+        try {
+        const response = await fetch(`http://localhost:8000/applications/${pk}`, {
+            method: "DELETE",
+        });
+
+        setApplications((prev) => prev.filter((application) => application.id !== pk));
+        } catch (err) {
+        console.log(err)
+        }
+    }
+
     return (
         <section className="py-24 px-4 relative bg-secondary/30">
             <div className="container mx-auto max-w-5xl">
@@ -65,6 +79,9 @@ export const ApplicationTableSection = () => {
                                     Status</h4>
                                 </th>
                                 <th className="p-4 border-b border-primary">
+                                    <h4 className="font-semibold">
+                                        Options
+                                    </h4>
                                 </th>
                             </tr>
                         </thead>
@@ -77,6 +94,8 @@ export const ApplicationTableSection = () => {
                                         <td>{job.salary}</td>
                                         <td>{job.applied_date}</td>
                                         <td>{job.status}</td>
+                                        <Trash2 onClick={() => deleteApplication(job.id)} className="text-primary h-6 w-40 cursor-pointer" />
+                                        <Edit className="text-primary h-6 w-40 cursor-pointer" />
                                     </tr>
                                 ))
                             ) : (
