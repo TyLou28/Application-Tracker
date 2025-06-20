@@ -1,5 +1,6 @@
 import { ApplicationTableSection } from "../components/ApplicationTableSection"
 import { Navbar } from "../components/Navbar"
+import { NewApplicationSection } from "../components/NewApplicationSection"
 import { ToggleTheme } from "../components/ToggleTheme"
 
 export const ViewApplications = () => {
@@ -10,6 +11,7 @@ export const ViewApplications = () => {
 
             <main>
                 <ApplicationTableSection />
+                <NewApplicationSection />
             </main>
         </div>
     )
