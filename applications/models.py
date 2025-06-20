@@ -9,8 +9,14 @@ class Applications(models.Model):
         ('phone screen', 'Phone Screen'),
         ('online assessment', 'Online Assessment'),
         ('assessment centre', 'Assessment Centre'),
+        ('first interview', 'First Interview'),
+        ('second interview', 'Second Interview'),
+        ('third interview', 'Third Interview'),
+        ('fourth interview', 'Fourth Interview'),
+        ('fifth interview', 'Fifth Interview'),
         ('offer', 'Offer'),
         ('rejected', 'Rejected'),
+        ('other', 'Other')
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
