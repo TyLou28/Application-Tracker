@@ -6,7 +6,7 @@ export const ApplicationTableSection = () => {
     const [statusError, setStatusError] = useState({});
 
     useEffect(() => {
-
+        fetchApplications();
     }, []);
 
     const fetchApplications = async () => {
@@ -41,7 +41,7 @@ export const ApplicationTableSection = () => {
                         Current Active Applications
                     </h2>
 
-                    <table className="w-full text-left table-auto min-w-max">
+                    <table className="w-full text-center table-auto min-w-max">
                         <thead>
                             <tr>
                                 <th className="p-4 border-b border-primary">
@@ -71,7 +71,7 @@ export const ApplicationTableSection = () => {
                         <tbody>
                             {applications.length > 0 ? (
                                 applications.map((job) => (
-                                    <tr className="" key={job.id}>
+                                    <tr className="mt-4" key={job.id}>
                                         <td>{job.role}</td>
                                         <td>{job.company}</td>
                                         <td>{job.salary}</td>
@@ -80,9 +80,9 @@ export const ApplicationTableSection = () => {
                                     </tr>
                                 ))
                             ) : (
-                                <h5 className="text-center text-primary">
+                                <p className="text-center text-primary">
                                     You have no active applications
-                                </h5>
+                                </p>
                             )}
                         </tbody>
                     </table>
