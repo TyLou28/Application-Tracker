@@ -28,42 +28,53 @@ export const Navbar = () => {
         }
         window.addEventListener("scroll", handleScroll)
 
+        const checkLoggedIn = async () => {
+            try {
+                const token = localStorage.getItem("accessToken");
+      
+                if (token) {
+                    const response = await fetch("http://localhost:8000/user", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
+                        }
+                    });
+
+                    if (response.status === 401) {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("refreshToken");
+                        setLoggedIn(false);
+                        setFirstName("");
+                        window.location.href = "/"
+                        return;
+                    }
+      
+                    if (!response.ok) {
+                        throw new Error("Failed to authenticate user");
+                    }
+      
+                    const data = await response.json();
+                    setLoggedIn(true);
+                    setFirstName(data.first_name); // Correctly accessing first name
+                } else {
+                    setLoggedIn(false);
+                    setFirstName("");
+                }
+            } catch (err) {
+                console.error("Error:", err);
+                setLoggedIn(false);
+                setFirstName("");
+            }
+        };
+
         checkLoggedIn()
 
         return () => window.removeEventListener("scroll", handleScroll)
 
     }, [])
 
-    const checkLoggedIn = async () => {
-        try {
-            const token = localStorage.getItem("accessToken");
-  
-            if (token) {
-                const response = await fetch("http://localhost:8000/user", {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    }
-                });
-  
-                if (!response.ok) {
-                    throw new Error("Failed to authenticate user");
-                }
-  
-                const data = await response.json();
-                setLoggedIn(true);
-                setFirstName(data.first_name); // Correctly accessing first name
-            } else {
-                setLoggedIn(false);
-                setFirstName("");
-            }
-        } catch (err) {
-            console.error("Error:", err);
-            setLoggedIn(false);
-            setFirstName("");
-        }
-    };
+    
 
     const handleLogout = async () => {
         try {
