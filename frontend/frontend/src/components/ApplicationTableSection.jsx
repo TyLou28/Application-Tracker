@@ -94,8 +94,11 @@ export const ApplicationTableSection = () => {
                                         <td>{job.salary}</td>
                                         <td>{job.applied_date}</td>
                                         <td>{job.status}</td>
-                                        <Trash2 onClick={() => deleteApplication(job.id)} className="text-primary h-6 w-40 cursor-pointer" />
-                                        <Edit className="text-primary h-6 w-40 cursor-pointer" />
+                                        <div className="flex justify-center space-x-4 mt-4">
+                                            <Trash2 onClick={() => deleteApplication(job.id)} className="text-primary cursor-pointer" />
+                                            <Edit className="text-primary cursor-pointer" />
+                                        </div>
+
                                     </tr>
                                 ))
                             ) : (
