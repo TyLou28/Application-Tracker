@@ -85,9 +85,9 @@ export const ApplicationTableSection = () => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {applications.length > 0 ? (
-                                applications.map((job) => (
+                        {applications.length > 0 ? (
+                            applications.map((job) => (
+                                <tbody>
                                     <tr className="mt-4" key={job.id}>
                                         <td>{job.role}</td>
                                         <td>{job.company}</td>
@@ -98,15 +98,16 @@ export const ApplicationTableSection = () => {
                                             <Trash2 onClick={() => deleteApplication(job.id)} className="text-primary cursor-pointer" />
                                             <Edit className="text-primary cursor-pointer" />
                                         </div>
-
                                     </tr>
-                                ))
-                            ) : (
-                                <p className="text-center text-primary">
-                                    You have no active applications
-                                </p>
-                            )}
-                        </tbody>
+                                </tbody>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={6} className="p-6 text-2xl text-semibold text-primary text-center">
+                                    You have no active applications, Add an application below
+                                </td>
+                            </tr>
+                        )}
                     </table>
                 </div>
             </div>
