@@ -5,6 +5,24 @@ export const ApplicationTableSection = () => {
     const [applications, setApplications] = useState([]);
     const [newStatus, setNewStatus] = useState("");
     const [statusError, setStatusError] = useState({});
+    const [editingId, setEditingId] = useState(null);
+    const [customStatus, setCustomStatus] = useState("")
+
+    const statusOptions = [
+        ['applied', 'Applied'],
+        ['video interview', 'Video Interview'],
+        ['phone screen', 'Phone Screen'],
+        ['online assessment', 'Online Assessment'],
+        ['assessment centre', 'Assessment Centre'],
+        ['first interview', 'First Interview'],
+        ['second interview', 'Second Interview'],
+        ['third interview', 'Third Interview'],
+        ['fourth interview', 'Fourth Interview'],
+        ['fifth interview', 'Fifth Interview'],
+        ['offer', 'Offer'],
+        ['rejected', 'Rejected'],
+        ['other', 'Other'],
+      ];
 
     useEffect(() => {
         fetchApplications();
@@ -30,6 +48,63 @@ export const ApplicationTableSection = () => {
             console.log(err)
         }
     }
+
+    const updateStatus = async (pk, company, role, location, salary) => {
+        const status = newStatus === "other" ? customStatus : newStatus;
+        const appData = {
+        company,
+        role,
+        location,
+        salary,
+        // Set status to new status
+        status: status,
+        };
+        try {
+        const response = await fetch(`http://localhost:8000/applications/${pk}`, {
+            method: "PUT",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(appData),
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            setStatusError((prev) => ({
+                ...prev,
+                [pk]: data.status || data.detail || "Unknown Error",
+            }));
+            return;
+        }
+
+        setStatusError((prev) => ({
+            ...prev,
+            [pk]: null,
+            }));
+
+        // Loop through all of the applications
+        // If the job id matches the pk, return the new data
+        // Otherwise, return the current application
+        setApplications((prev) => 
+            prev.map((job) => {
+            if (job.id === pk) {
+                return data;
+            } else {
+                return job;
+            }
+            })
+        );
+        setNewStatus('');
+        setCustomStatus('');
+        } catch (err) {
+        console.log(err)
+        setStatusError((prev) => ({
+            ...prev,
+            [pk]: "Something went wrong"
+            }));
+        }
+    }
+
     
     const deleteApplication = async (pk) => {
         try {
@@ -88,16 +163,80 @@ export const ApplicationTableSection = () => {
                         {applications.length > 0 ? (
                             applications.map((job) => (
                                 <tbody>
-                                    <tr className="mt-4" key={job.id}>
-                                        <td>{job.role}</td>
-                                        <td>{job.company}</td>
-                                        <td>{job.salary}</td>
-                                        <td>{job.applied_date}</td>
-                                        <td>{job.status}</td>
-                                        <div className="flex justify-center space-x-4 mt-4">
-                                            <Trash2 onClick={() => deleteApplication(job.id)} className="text-primary cursor-pointer" />
-                                            <Edit className="text-primary cursor-pointer" />
-                                        </div>
+                                    <tr key={job.id}>
+                                        <td className="p-4 border-b">{job.role}</td>
+                                        <td className="p-4 border-b">{job.company}</td>
+                                        <td className="p-4 border-b">{job.salary}</td>
+                                        <td className="p-4 border-b">{job.applied_date}</td>
+                                        
+                                        <td className="p-4 border-b">
+                                            {editingId === job.id ? (
+                                                <div className="flex flex-col gap-2">
+                                                    <select
+                                                        id="status"
+                                                        value={newStatus}
+                                                        required
+                                                        onChange={(e) => {
+                                                            const selected = e.target.value
+                                                            setNewStatus(selected)
+                                                            if (selected !== "other") setCustomStatus('');
+                                                        }}
+                                                        className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary">
+                                                        <option value="" disabled>Select application status</option>
+                                                        {statusOptions.map(([value, label]) => (
+                                                            <option key={value} value={value}>{label}</option>
+                                                        ))}                                                       
+                                                    </select>
+
+                                                    {newStatus === "other" && (
+                                                        <input
+                                                        type="text"
+                                                        required
+                                                        value={customStatus}
+                                                        placeholder="Enter custom status..."
+                                                        className="mt-4 w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                                                        onChange={(e) => setCustomStatus(e.target.value)}
+                                                        />
+                                                    )}
+                                                </div>
+
+
+                                            ) : (
+                                                job.status
+                                            )}
+                                            {statusError[job.id] && (
+                                                <p className="text-red-500 text-sm mt-1">{statusError[job.id]}</p>
+                                            )}
+                                        </td>
+
+                                        <td className="p-4 border-b">
+                                            <div className="flex items-center justify-center gap-4">
+                                                <Trash2
+                                                    onClick={() => deleteApplication(job.id)}
+                                                    className="text-primary cursor-pointer"
+                                                />
+                                                {editingId === job.id ? (
+                                                    <button
+                                                        onClick={() => {
+                                                            updateStatus(job.id, job.company, job.role, job.location, job.salary);
+                                                            setEditingId(null);
+                                                        }}
+                                                        className="button-one text-sm px-3 py-1"
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                ) : (
+                                                    <Edit
+                                                        onClick={() => {
+                                                            setEditingId(job.id);
+                                                            setNewStatus(job.status);
+                                                            setCustomStatus('');
+                                                        }}
+                                                        className="text-primary cursor-pointer"
+                                                    />
+                                                )}
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             ))

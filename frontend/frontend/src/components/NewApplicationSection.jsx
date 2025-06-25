@@ -8,6 +8,7 @@ export const NewApplicationSection = () => {
     const [location, setLocation] = useState("")
     const [salary, setSalary] = useState("")
     const [status, setStatus] = useState("")
+    const [customStatus, setCustomStatus] = useState("")
     const [applied_date, setApplied_date] = useState("")
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -33,13 +34,14 @@ export const NewApplicationSection = () => {
             return
         }
         const token = localStorage.getItem("accessToken");  // Retrieve stored token
+        const statuss = status === "other" ? customStatus : status;
     
         const appData = {
             company,
             role,
             location,
             salary,
-            status,
+            status: statuss,
             applied_date,
         };
         setIsSubmitting(true)
@@ -71,6 +73,7 @@ export const NewApplicationSection = () => {
             setLocation('');
             setSalary('');
             setStatus('');
+            setCustomStatus('');
             window.location.href = "view-applications"
         } catch (err) {
             console.error("Error:", err);
@@ -116,15 +119,15 @@ export const NewApplicationSection = () => {
                         </div>
                         <div>
                             <label htmlFor="status" className="block text-sm font-medium mb-1">Status</label>
-                            {/*
-                            <input type="text" id="status" required value={status} placeholder="Status of Application..."
-                            className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                            onChange={(e) => setStatus(e.target.value)} /> */ }
                             <select
                              id="status"
                              value={status}
                              required
-                             onChange={(e) => setStatus(e.target.value)}
+                             onChange={(e) => {
+                                const selected = e.target.value
+                                setStatus(selected)
+                                if (selected !== "other") setCustomStatus('');
+                             }}
                              className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary">
                                 <option value="" disabled>Select application status</option>
                                 {statusOptions.map(([value, label]) => (
@@ -136,9 +139,10 @@ export const NewApplicationSection = () => {
                                 <input
                                 type="text"
                                 required
+                                value={customStatus}
                                 placeholder="Enter custom status..."
                                 className="mt-4 w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                                onChange={(e) => setStatus(e.target.value)}
+                                onChange={(e) => setCustomStatus(e.target.value)}
                                 />
                              )}
                         </div>
