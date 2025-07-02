@@ -7,6 +7,7 @@ import { NotFound } from './pages/NotFound';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { ViewApplications } from './pages/ViewApplications';
+import { Notes } from './pages/Notes';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='login' element={<Login />}/>
           <Route path='register' element={<Register />}/>
           <Route path='view-applications' element={<ViewApplications />} />
+          <Route path='applications/:pk/notes' element={<Notes />} />
           <Route path='*' element={<NotFound />}/>
         </Routes>
       </BrowserRouter>
