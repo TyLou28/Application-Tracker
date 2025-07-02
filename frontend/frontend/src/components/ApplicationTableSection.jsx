@@ -1,5 +1,6 @@
-import { Edit, Trash2 } from "lucide-react";
+import { ArrowUpRightFromSquare, Edit, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
 export const ApplicationTableSection = () => {
     const [applications, setApplications] = useState([]);
@@ -158,6 +159,11 @@ export const ApplicationTableSection = () => {
                                         Options
                                     </h4>
                                 </th>
+                                <th className="p-4 border-b border-primary">
+                                    <h4 className="font-semibold">
+                                        Notes
+                                    </h4>
+                                </th>
                             </tr>
                         </thead>
                         {applications.length > 0 ? (
@@ -168,7 +174,6 @@ export const ApplicationTableSection = () => {
                                         <td className="p-4 border-b">{job.company}</td>
                                         <td className="p-4 border-b">{job.salary}</td>
                                         <td className="p-4 border-b">{job.applied_date}</td>
-                                        
                                         <td className="p-4 border-b">
                                             {editingId === job.id ? (
                                                 <div className="flex flex-col gap-2">
@@ -236,6 +241,21 @@ export const ApplicationTableSection = () => {
                                                     />
                                                 )}
                                             </div>
+                                        </td>
+                                        <td className="p-4 border-b">
+                                            <div className="flex items-center justify-center gap-4">
+                                                <Link to={{
+                                                    pathname:`/applications/${job.id}/notes`,
+                                                    }}
+                                                    state={{
+                                                        role: job.role,
+                                                        company: job.company
+                                                    }}
+                                                    className="text-primary cursor-pointer">
+                                                    <ArrowUpRightFromSquare />
+                                                </Link>
+                                            </div>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>
